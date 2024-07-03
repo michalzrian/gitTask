@@ -1,5 +1,5 @@
 
-const userRouter = require('./routing');
+const userRouter = require('./routing/userRoutes');
 const middleware_vlidation = require('./middleware/validateUser');
 const express = require('express');
 const app = express();
