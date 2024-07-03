@@ -1,9 +1,11 @@
 
 const userRouter = require('./routing');
+const middleware_vlidation = require('./middleware/validateUser');
 const express = require('express');
 const app = express();
 app.use(express.json());
 
+app.use(middleware_vlidation);
 app.use('/api',userRouter);
 
 // Start the server
