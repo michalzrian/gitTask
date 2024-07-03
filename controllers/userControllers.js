@@ -1,33 +1,27 @@
 // userController.js - קונטרולר לניהול משתמשים
 
-let users = [];
+const User = require('./User'); // או כל נתיב אחר שבו נמצא המודל User
 
 function createUser(name, email, phone) {
-    const id = users.length + 1;
-    const newUser = { id, name, email, phone };
-    users.push(newUser);
-    return newUser;
+    return User.createUser({ name, email, phoneNumber: phone });
 }
 
 function updateUser(id, newName, newEmail, newPhone) {
-    const userToUpdate = users.find(user => user.id === id);
-    if (userToUpdate) {
-        userToUpdate.name = newName;
-        userToUpdate.email = newEmail;
-        userToUpdate.phone = newPhone;
-        return userToUpdate;
-    }
-    return null;
+    return User.updateUser(id, { name: newName, email: newEmail, phoneNumber: newPhone });
 }
 
 function deleteUser(id) {
-    const initialLength = users.length;
-    users = users.filter(user => user.id !== id);
-    return users.length !== initialLength;
+    return User.deleteUser(id);
 }
 
 function getUserById(id) {
-    return users.find(user => user.id === id) || null;
+    const user = User.getUserById(id);
+    if (!user) {
+        const error = new Error(`User with id ${id} not found`);
+        error.statusCode = 404;
+        throw error;
+    }
+    return user;
 }
 
 module.exports = {
