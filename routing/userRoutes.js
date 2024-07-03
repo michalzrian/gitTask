@@ -1,7 +1,7 @@
 // routes.js - קובץ הראוטינג
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/userController');
+const userController = require('../controllers/userControllers');
 const validateUser = require('../middleware/validateUser');
 
 router.post('/users', validateUser, (req, res) => {
