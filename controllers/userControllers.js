@@ -1,6 +1,6 @@
 // userController.js - קונטרולר לניהול משתמשים
 
-const User = require('./User'); // או כל נתיב אחר שבו נמצא המודל User
+const User = require('../models/userModel'); // או כל נתיב אחר שבו נמצא המודל User
 
 function createUser(name, email, phone) {
     return User.createUser({ name, email, phoneNumber: phone });
