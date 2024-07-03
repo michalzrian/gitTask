@@ -1,6 +1,6 @@
 // userController.js - קונטרולר לניהול משתמשים
 
-const User = require('../models/userModel'); // או כל נתיב אחר שבו נמצא המודל User
+const User = require('./User'); // או כל נתיב אחר שבו נמצא המודל User
 
 function createUser(name, email, phone) {
     return User.createUser({ name, email, phoneNumber: phone });
@@ -15,7 +15,13 @@ function deleteUser(id) {
 }
 
 function getUserById(id) {
-    return User.getUserById(id);
+    const user = User.getUserById(id);
+    if (!user) {
+        const error = new Error(`User with id ${id} not found`);
+        error.statusCode = 404;
+        throw error;
+    }
+    return user;
 }
 
 module.exports = {
