@@ -1,16 +1,16 @@
 // routes.js - קובץ הראוטינג
-
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const validateUser = require('../middleware/validateUser');
 
-router.post('/users', (req, res) => {
+router.post('/users', validateUser, (req, res) => {
     const { name, email, phone } = req.body;
     const newUser = userController.createUser(name, email, phone);
     res.json(newUser);
 });
 
-router.put('/users/:id', (req, res) => {
+router.put('/users/:id', validateUser, (req, res) => {
     const { id } = req.params;
     const { name, email, phone } = req.body;
     const updatedUser = userController.updateUser(Number(id), name, email, phone);
