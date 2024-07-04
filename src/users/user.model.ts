@@ -1,3 +1,4 @@
+
 // users/user.model.ts
 export class User {
     private static nextId: number = 1;
@@ -58,4 +59,3 @@ export class User {
       return true;
     }
   }
-  
