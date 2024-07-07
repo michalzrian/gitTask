@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: gitTask-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  nest-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gittask-nest-app
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=mongodb://root:example@mongo:27017/nest?authSource=admin
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
